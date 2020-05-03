@@ -1,24 +1,26 @@
 const log = require('node-log-simple');
 require('svelte/register');
 
-exports.run = function () {
-  log.info('[Router] Running tests');
-
-  const HelloWorld = require('../HelloWorld/HelloWorld.svelte').default;
-
+function testRender() {
   const Router = require('./Router.svelte').default;
-
   try {
     const { head, html, css } = Router.render({
       routes: [
         {
           path: '/',
-          component: HelloWorld,
+          component: require('../HelloWorld/HelloWorld.svelte').default,
         },
       ],
     });
   } catch (error) {
-    log.error('[Router] Test failed');
-    log.error(`[Router] ${error}`);
+    return `[Router] ${error}`;
   }
+}
+
+exports.run = function () {
+  let tests = [];
+  tests.push(testRender);
+  return tests.map((test) => {
+    return test();
+  });
 };
