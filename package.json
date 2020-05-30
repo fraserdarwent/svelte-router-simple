@@ -1,6 +1,6 @@
 {
   "name": "svelte-router-simple",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "ISC",
   "scripts": {
     "test": "node ."
