@@ -1,6 +1,7 @@
 <script context="module">
   export function go(pathname) {
     window.history.pushState({}, "", pathname);
+    window.dispatchEvent(new Event("pushState"));
   }
 </script>
 
@@ -13,12 +14,20 @@
   let component;
 
   onMount(async () => {
+    findRoute();
+    window.addEventListener("pushState", function() {
+      console.log("Fired pushState event");
+      findRoute();
+    });
+  });
+
+  function findRoute() {
     if (!validateRoutes()) {
       component = route(window.location.pathname, routes);
     } else {
       log.error("[svelte-router-simple] No matching route found");
     }
-  });
+  }
 
   function route(pathname, routes = []) {
     log.debug(`[svelte-router-simple] Routing "${pathname}"`);
