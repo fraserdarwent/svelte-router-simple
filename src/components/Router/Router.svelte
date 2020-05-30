@@ -10,11 +10,6 @@
 
   const log = require("node-log-simple");
 
-  // location.subscribe((value) => {
-  //   setUrl(value.route);
-  //   setView(value.route);
-  // });
-
   let component;
 
   onMount(async () => {
