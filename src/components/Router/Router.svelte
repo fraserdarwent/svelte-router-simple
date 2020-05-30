@@ -1,6 +1,6 @@
 <script context="module">
   export function go(pathname) {
-    window.location.replace(pathname);
+    window.history.pushState({}, "", pathname);
   }
 </script>
 
