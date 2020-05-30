@@ -16,7 +16,6 @@
   onMount(async () => {
     findRoute();
     window.addEventListener("pushState", function() {
-      console.log("Fired pushState event");
       findRoute();
     });
   });
