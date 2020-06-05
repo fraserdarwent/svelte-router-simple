@@ -18,18 +18,19 @@
     window.addEventListener("pushState", function() {
       findRoute();
     });
+
+    window.onpopstate = function(event) {
+      findRoute();
+    };
   });
 
   function findRoute() {
     if (!validateRoutes()) {
       component = route(window.location.pathname, routes);
-    } else {
-      log.error("[svelte-router-simple] No matching route found");
     }
   }
 
   function route(pathname, routes = []) {
-    log.debug(`[svelte-router-simple] Routing "${pathname}"`);
     function match(pathname, routes = []) {
       const matched = routes.find(route => {
         // If prefix matches
