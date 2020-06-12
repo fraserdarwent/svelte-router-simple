@@ -6,6 +6,7 @@
 </script>
 
 <script>
+  import "array-flat-polyfill";
   import { onMount } from "svelte";
   export let routes;
 
@@ -27,6 +28,7 @@
   function findRoute() {
     if (!validateRoutes()) {
       component = route(window.location.pathname, routes);
+    } else {
     }
   }
 
@@ -47,15 +49,15 @@
   }
 
   function validateRoutes() {
-    routes.flat(Infinity).every(route => {
+    routes.flat().every(route => {
       if (!route.component) {
-        log.error(
+        console.log(
           `[svelte-router-simple] Route "${route.prefix}" is missing required key "component"`
         );
         return false;
       }
       if (route.exact && route.routes && 0 < route.routes.length) {
-        log.error(
+        console.log(
           `[svelte-router-simple] Route "${route.exact}" of type "exact" should not have routes as they will be ignored`
         );
         return false;
