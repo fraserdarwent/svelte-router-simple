@@ -3,7 +3,7 @@
 ## Installation
 
 ```bash
-yarn install svelte-router-simple
+yarn add svelte-router-simple
 ```
 
 ## Usage
