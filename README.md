@@ -1,4 +1,4 @@
-# svelte-router-simple
+# svelte-router
 
 ## Installation
 
