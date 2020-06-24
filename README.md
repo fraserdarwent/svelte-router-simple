@@ -3,7 +3,7 @@
 ## Installation
 
 ```bash
-yarn add svelte-router-simple
+yarn add @fraserdarwent/svelte-router
 ```
 
 ## Usage
