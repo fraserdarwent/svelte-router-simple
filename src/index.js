@@ -1,7 +1,10 @@
 // This file is used to export the objects
 
-import Router from './components/Router/Router'
-import {go} from './components/Router/Router'
+import Router from "./components/Router/index.svelte";
+import {
+  moduleRoute as route,
+  moduleGo as go,
+} from "./components/Router/index.svelte";
 
-export {go}
-export default Router
+export { route, go };
+export default Router;

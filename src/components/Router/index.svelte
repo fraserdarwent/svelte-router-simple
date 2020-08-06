@@ -1,5 +1,11 @@
 <script context="module">
-  export function go(pathname) {
+  export function moduleGo(pathname) {
+    console.error(
+      `[@fraserdarwent/svelte-router] Function "go" is deprecated and will be removed in future version, please use "route" instead`
+    );
+    moduleRoute(pathname);
+  }
+  export function moduleRoute(pathname) {
     window.history.pushState({}, "", pathname);
     window.dispatchEvent(new Event("pushState"));
   }
@@ -9,8 +15,6 @@
   import "array-flat-polyfill";
   import { onMount } from "svelte";
   export let routes;
-
-  const log = require("node-log-simple");
 
   let component;
 
@@ -26,6 +30,7 @@
   });
 
   function findRoute() {
+    console.log(`[@fraserdarwent/svelte-router] Finding route`);
     if (!validateRoutes()) {
       component = route(window.location.pathname, routes);
     } else {
@@ -52,13 +57,13 @@
     routes.flat().every(route => {
       if (!route.component) {
         console.log(
-          `[svelte-router-simple] Route "${route.prefix}" is missing required key "component"`
+          `[@fraserdarwent/svelte-router] Route "${route.prefix}" is missing required key "component"`
         );
         return false;
       }
       if (route.exact && route.routes && 0 < route.routes.length) {
         console.log(
-          `[svelte-router-simple] Route "${route.exact}" of type "exact" should not have routes as they will be ignored`
+          `[@fraserdarwent/svelte-router] Route "${route.exact}" of type "exact" should not have routes as they will be ignored`
         );
         return false;
       }

@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@fraserdarwent/javascript-logger@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@fraserdarwent/javascript-logger/-/javascript-logger-1.0.3.tgz#91d1086930642197f27bdb8e14dcba7af8be46d1"
+  integrity sha512-PmbJ25re0soco+3gMyzd3Aw8K7EGmhu8cIGaFaauvGNqmq+vZ1gIgdBwHWnr40c+5gL2T9bAE4/9OpzFd4MhEg==
+
 array-flat-polyfill@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/array-flat-polyfill/-/array-flat-polyfill-1.0.1.tgz#1e3a4255be619dfbffbfd1d635c1cf357cd034e7"
@@ -13,6 +18,6 @@ node-log-simple@^1.0.1:
   integrity sha512-Ns2//5X2QSjTVE8de4AHh+0VNT2NJ+EC2nSLUvfEn3gN4hbv5LjqmcmrGB9X5R1FQ5m2iJ9LUfLH1VVvJDLMaw==
 
 svelte@^3.23.2:
-  version "3.23.2"
-  resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.23.2.tgz#f3e500384261a2e77b29681ee744c3c790fbcdc3"
-  integrity sha512-hE8GeTM83YVR4GY6/6PeDEcGct4JS5aCi+IYbCAa76oaPSfuF7L85DQYULQxlTK/KPWzw3L1GRGmC3oPG/PQoA==
+  version "3.24.1"
+  resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.24.1.tgz#aca364937dd1df27fe131e2a4c234acb6061db4b"
+  integrity sha512-OX/IBVUJSFo1rnznXdwf9rv6LReJ3qQ0PwRjj76vfUWyTfbHbR9OXqJBnUrpjyis2dwYcbT2Zm1DFjOOF1ZbbQ==

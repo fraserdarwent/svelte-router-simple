@@ -1,19 +1,18 @@
-const log = require('node-log-simple');
-require('svelte/register');
+require("svelte/register");
 
 function testRender() {
-  const Router = require('./Router.svelte').default;
+  const Router = require(".").default;
   try {
     const { head, html, css } = Router.render({
       routes: [
         {
-          path: '/',
-          component: require('../HelloWorld/HelloWorld.svelte').default,
+          path: "/",
+          component: require("../HelloWorld").default,
         },
       ],
     });
   } catch (error) {
-    return `[Router] ${error}`;
+    return error;
   }
 }
 

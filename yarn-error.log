@@ -1,20 +1,20 @@
 Arguments: 
-  /usr/local/Cellar/node/13.8.0/bin/node /Users/fraser/.yarn/bin/yarn.js test
+  /usr/local/Cellar/node/14.6.0/bin/node /Users/fraser/.yarn/bin/yarn.js add @fraserdarwent/javascript-logger
 
 PATH: 
-  /Users/fraser/Tools/gcloud/google-cloud-sdk/bin:/Users/fraser/Code/go/bin:/Users/fraser/Phones/platform-tools:/Users/fraser/.cargo/bin:/Users/fraser/.yarn/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/fraser/Code/go/bin:/Users/fraser/Phones/platform-tools:/Users/fraser/.cargo/bin:/Users/fraser/.vscode-server/bin/2aae1f26c72891c399f860409176fe435a154b13/bin
+  /Users/fraser/Tools/gcloud/google-cloud-sdk/bin:/Users/fraser/Code/go/bin:/Users/fraser/Phones/platform-tools:/Users/fraser/.cargo/bin:/Users/fraser/.yarn/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/fraser/Code/go/bin:/Users/fraser/Phones/platform-tools:/Users/fraser/.cargo/bin:/Users/fraser/.vscode-server/bin/91899dcef7b8110878ea59626991a18c8a6a1b3e/bin
 
 Yarn version: 
   1.22.4
 
 Node version: 
-  13.8.0
+  14.6.0
 
 Platform: 
   darwin x64
 
 Trace: 
-  SyntaxError: /Users/fraser/Code/svelte-router-simple/package.json: Unexpected token / in JSON at position 156
+  SyntaxError: /Users/fraser/Code/svelte-router/package.json: Unexpected token } in JSON at position 325
       at JSON.parse (<anonymous>)
       at /Users/fraser/.yarn/lib/cli.js:1625:59
       at Generator.next (<anonymous>)
@@ -23,17 +23,20 @@ Trace:
 
 npm manifest: 
   {
-    "name": "svelte-router-simple",
-    "version": "0.0.0",
+    "name": "@fraserdarwent/svelte-router",
+    "version": "1.0.9",
     "license": "ISC",
     "scripts": {
-      "test": "node src/test.js"
+      "test": "node ."
     },
-    "main": "src/test.js",
-    // "module": "src/index.js",
+    "main": "src/tests.js",
+    "module": "src/index.js",
     "dependencies": {
+      "array-flat-polyfill": "^1.0.1",
+      "svelte": "^3.23.2"
+    },
+    "devDependencies": {
       "node-log-simple": "^1.0.1",
-      "svelte": "^3.21.0"
     }
   }
 
@@ -45,12 +48,17 @@ Lockfile:
   # yarn lockfile v1
   
   
-  node-log-simple@^1.0.1:
+  array-flat-polyfill@^1.0.1:
     version "1.0.1"
-    resolved "https://registry.yarnpkg.com/node-log-simple/-/node-log-simple-1.0.1.tgz#f113ef4e214a0d95b681089b7a7da9c28d421903"
-    integrity sha512-4qXSa5+wS0Bxf+sQNfRmeoCxbYCpXIKb3Mtl/v6Q7NY5B1AiUPvExTpUGhkzWINta3eyIx/5ngtXfLecIPoniQ==
+    resolved "https://registry.yarnpkg.com/array-flat-polyfill/-/array-flat-polyfill-1.0.1.tgz#1e3a4255be619dfbffbfd1d635c1cf357cd034e7"
+    integrity sha512-hfJmKupmQN0lwi0xG6FQ5U8Rd97RnIERplymOv/qpq8AoNKPPAnxJadjFA23FNWm88wykh9HmpLJUUwUtNU/iw==
   
-  svelte@^3.21.0:
-    version "3.21.0"
-    resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.21.0.tgz#e326591cb92267e90b4fb5b961d80d9763792551"
-    integrity sha512-smh3LZKPCGJ+UXa0iZvUmuDctPYCwPY1opmClTWTm+l6e4y9FHLoCZMiue8YIeyc9JvlGT/EK0xry0diXjFDZQ==
+  node-log-simple@^1.0.1:
+    version "1.0.2"
+    resolved "https://registry.yarnpkg.com/node-log-simple/-/node-log-simple-1.0.2.tgz#2fbe07fae707f73f92919daa885797cebab90438"
+    integrity sha512-Ns2//5X2QSjTVE8de4AHh+0VNT2NJ+EC2nSLUvfEn3gN4hbv5LjqmcmrGB9X5R1FQ5m2iJ9LUfLH1VVvJDLMaw==
+  
+  svelte@^3.23.2:
+    version "3.24.1"
+    resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.24.1.tgz#aca364937dd1df27fe131e2a4c234acb6061db4b"
+    integrity sha512-OX/IBVUJSFo1rnznXdwf9rv6LReJ3qQ0PwRjj76vfUWyTfbHbR9OXqJBnUrpjyis2dwYcbT2Zm1DFjOOF1ZbbQ==
