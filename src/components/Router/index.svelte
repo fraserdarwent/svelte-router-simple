@@ -30,7 +30,6 @@
   });
 
   function findRoute() {
-    console.log(`[@fraserdarwent/svelte-router] Finding route`);
     if (!validateRoutes()) {
       component = route(window.location.pathname, routes);
     } else {
@@ -56,13 +55,13 @@
   function validateRoutes() {
     routes.flat().every(route => {
       if (!route.component) {
-        console.log(
+        console.error(
           `[@fraserdarwent/svelte-router] Route "${route.prefix}" is missing required key "component"`
         );
         return false;
       }
       if (route.exact && route.routes && 0 < route.routes.length) {
-        console.log(
+        console.error(
           `[@fraserdarwent/svelte-router] Route "${route.exact}" of type "exact" should not have routes as they will be ignored`
         );
         return false;

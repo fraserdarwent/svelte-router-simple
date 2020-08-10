@@ -12,11 +12,6 @@ array-flat-polyfill@^1.0.1:
   resolved "https://registry.yarnpkg.com/array-flat-polyfill/-/array-flat-polyfill-1.0.1.tgz#1e3a4255be619dfbffbfd1d635c1cf357cd034e7"
   integrity sha512-hfJmKupmQN0lwi0xG6FQ5U8Rd97RnIERplymOv/qpq8AoNKPPAnxJadjFA23FNWm88wykh9HmpLJUUwUtNU/iw==
 
-node-log-simple@^1.0.1:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/node-log-simple/-/node-log-simple-1.0.2.tgz#2fbe07fae707f73f92919daa885797cebab90438"
-  integrity sha512-Ns2//5X2QSjTVE8de4AHh+0VNT2NJ+EC2nSLUvfEn3gN4hbv5LjqmcmrGB9X5R1FQ5m2iJ9LUfLH1VVvJDLMaw==
-
 svelte@^3.23.2:
   version "3.24.1"
   resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.24.1.tgz#aca364937dd1df27fe131e2a4c234acb6061db4b"
