@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@fraserdarwent/javascript-logger@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@fraserdarwent/javascript-logger/-/javascript-logger-1.0.3.tgz#91d1086930642197f27bdb8e14dcba7af8be46d1"
-  integrity sha512-PmbJ25re0soco+3gMyzd3Aw8K7EGmhu8cIGaFaauvGNqmq+vZ1gIgdBwHWnr40c+5gL2T9bAE4/9OpzFd4MhEg==
+"@fraserdarwent/javascript-logger@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@fraserdarwent/javascript-logger/-/javascript-logger-1.0.4.tgz#41383339ad47399c9fc519b58f0f971cc56387fd"
+  integrity sha512-9ZRu++qf8EjoOT4Neapb1lMPgN5tN77u+eFctvV2XM+4dHfNKYMEN+aas5QbGs4d7HOIBwW8HvCTkb1Dd6uAkQ==
 
 array-flat-polyfill@^1.0.1:
   version "1.0.1"
