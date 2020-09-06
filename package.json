@@ -9,9 +9,11 @@
   "module": "src/index.js",
   "dependencies": {
     "array-flat-polyfill": "^1.0.1",
-    "svelte": "^3.23.2"
+    "mock-browser": "^0.92.14",
+    "svelte": "^3.23.2",
+    "window-mock": "^0.1.0"
   },
   "devDependencies": {
-    "@fraserdarwent/javascript-logger": "^1.0.3"
+    "@fraserdarwent/javascript-logger": "^1.0.4"
   }
 }

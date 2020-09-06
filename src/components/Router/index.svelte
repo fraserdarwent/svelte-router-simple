@@ -1,42 +1,19 @@
 <script context="module">
-  export function moduleGo(pathname) {
+  import "array-flat-polyfill";
+
+  export function go(pathname) {
     console.error(
       `[@fraserdarwent/svelte-router] Function "go" is deprecated and will be removed in future version, please use "route" instead`
     );
-    moduleRoute(pathname);
+    route(pathname);
   }
-  export function moduleRoute(pathname) {
+
+  export function route(pathname) {
     window.history.pushState({}, "", pathname);
     window.dispatchEvent(new Event("pushState"));
   }
-</script>
 
-<script>
-  import "array-flat-polyfill";
-  import { onMount } from "svelte";
-  export let routes;
-
-  let component;
-
-  onMount(async () => {
-    findRoute();
-    window.addEventListener("pushState", function() {
-      findRoute();
-    });
-
-    window.onpopstate = function(event) {
-      findRoute();
-    };
-  });
-
-  function findRoute() {
-    if (!validateRoutes()) {
-      component = route(window.location.pathname, routes);
-    } else {
-    }
-  }
-
-  function route(pathname, routes = []) {
+  export function getComponent(pathname, routes = []) {
     function match(pathname, routes = []) {
       const matched = routes.find(route => {
         // If prefix matches
@@ -52,11 +29,21 @@
     return match(pathname, routes);
   }
 
-  function validateRoutes() {
-    routes.flat().every(route => {
+  function getCurrentComponent(routes) {
+    return getComponent(window.location.pathname, routes);
+  }
+
+  export function validateRoutes(routes) {
+    const valid = routes.flat().every(route => {
       if (!route.component) {
         console.error(
           `[@fraserdarwent/svelte-router] Route "${route.prefix}" is missing required key "component"`
+        );
+        return false;
+      }
+      if (!route.exact && !route.prefix) {
+        console.error(
+          `[@fraserdarwent/svelte-router] All routes must have one of "exact" or "prefix"`
         );
         return false;
       }
@@ -68,7 +55,29 @@
       }
       return true;
     });
+    return valid;
   }
+</script>
+
+<script>
+  import { onMount } from "svelte";
+  export let routes;
+
+  let component;
+
+  onMount(async () => {
+    const validRoutes = validateRoutes(routes);
+    if (validRoutes) {
+      component = getCurrentComponent(routes);
+      window.addEventListener("pushState", function() {
+        component = getCurrentComponent(routes);
+      });
+
+      window.onpopstate = function(event) {
+        component = getCurrentComponent(routes);
+      };
+    }
+  });
 </script>
 
 <svelte:component this={component} />
