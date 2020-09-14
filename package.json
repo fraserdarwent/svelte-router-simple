@@ -9,7 +9,7 @@
   "module": "src/index.js",
   "dependencies": {
     "array-flat-polyfill": "^1.0.1",
-    "svelte": "^3.23.2"
+    "svelte": "^3.25.0"
   },
   "devDependencies": {
     "@fraserdarwent/javascript-logger": "^1.0.3"
