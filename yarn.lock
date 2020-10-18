@@ -12,6 +12,16 @@ array-flat-polyfill@^1.0.1:
   resolved "https://registry.yarnpkg.com/array-flat-polyfill/-/array-flat-polyfill-1.0.1.tgz#1e3a4255be619dfbffbfd1d635c1cf357cd034e7"
   integrity sha512-hfJmKupmQN0lwi0xG6FQ5U8Rd97RnIERplymOv/qpq8AoNKPPAnxJadjFA23FNWm88wykh9HmpLJUUwUtNU/iw==
 
+prettier-airbnb-config@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/prettier-airbnb-config/-/prettier-airbnb-config-1.0.0.tgz#a070740d421b3a59ad31f032d467cfbb6fafc5d1"
+  integrity sha512-FsEe38fJftYi19AskzuOWbw8zBnXDcZwv2Uw8BI65ROyK4hE6+iojXVFu+FiYNfrRBL+UZJbl2XGk56Ur2QGsA==
+
+prettier@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.1.2.tgz#3050700dae2e4c8b67c4c3f666cdb8af405e1ce5"
+  integrity sha512-16c7K+x4qVlJg9rEbXl7HEGmQyZlG4R9AgP+oHKRMsMsuk8s+ATStlf1NpDqyBI1HpVyfjLOeMhH2LvuNvV5Vg==
+
 svelte@^3.23.2:
   version "3.29.0"
   resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.29.0.tgz#80acac4254341ad8f3301e5ef03f4127ea967d96"

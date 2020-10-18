@@ -1,13 +1,13 @@
-require("svelte/register");
+require('svelte/register');
 
 function testRender() {
-  const Router = require(".").default;
+  const Router = require('.').default;
   try {
-    const { head, html, css } = Router.render({
+    const {head, html, css} = Router.render({
       routes: [
         {
-          path: "/",
-          component: require("../HelloWorld").default,
+          path: '/',
+          component: require('../HelloWorld').default,
         },
       ],
     });
@@ -19,7 +19,7 @@ function testRender() {
 exports.run = function () {
   let tests = [];
   tests.push(testRender);
-  return tests.map((test) => {
+  return tests.map(test => {
     return test();
   });
 };

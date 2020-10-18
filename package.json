@@ -8,6 +8,8 @@
   "module": "src/index.js",
   "dependencies": {
     "array-flat-polyfill": "^1.0.1",
+    "prettier": "^2.1.2",
+    "prettier-airbnb-config": "^1.0.0",
     "svelte": "^3.23.2"
   },
   "devDependencies": {

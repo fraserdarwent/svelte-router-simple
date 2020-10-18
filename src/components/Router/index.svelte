@@ -14,7 +14,6 @@
 <script>
   import "array-flat-polyfill";
   import { onMount } from "svelte";
-  import { fly, fade } from "svelte/transition";
 
   export let routes;
 
@@ -32,6 +31,7 @@
   });
 
   function findRoute() {
+    console.log(window.location)
     if (!validateRoutes()) {
       component = route(window.location.pathname, routes);
     } else {
