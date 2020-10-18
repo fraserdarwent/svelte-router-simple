@@ -1,7 +1,7 @@
 import 'svelte/register.js';
 import log from '@fraserdarwent/javascript-logger';
 import assert from 'assert';
-import {route, matchRoutes, validateRoutes} from './components/Router.svelte';
+import {route, matchRoutes, validateRoutes, validateMethod} from './components/Router.svelte';
 
 let tests = [];
 
@@ -13,6 +13,29 @@ global.window = {
   history: {pushState: () => {}},
   dispatchEvent: () => {},
 };
+
+tests.push(function testInvalidMethod() {
+  try {
+    validateMethod('foo');
+    return error;
+  } catch (error) {}
+});
+
+tests.push(function validMethod() {
+  try {
+    validateMethod('path');
+  } catch (error) {
+    return error;
+  }
+});
+
+tests.push(function validMethod() {
+  try {
+    validateMethod('hash');
+  } catch (error) {
+    return error;
+  }
+});
 
 tests.push(function testDepthZero() {
   const routes = [

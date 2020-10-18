@@ -72,13 +72,12 @@
     switch (method) {
       case 'path':
       case 'hash': {
-        return method;
+        break;
       }
       default: {
-        console.error(
+        throw new Error(
           `[@fraserdarwent/svelte-router] Unknown method "${method}", falling back to "path"`
         );
-        return 'path';
       }
     }
   };
@@ -93,7 +92,14 @@
 
   onMount(async function () {
     const validRoutes = validateRoutes(routes);
-    method = validateMethod(method);
+
+    try {
+      validateMethod(method);
+    } catch (error) {
+      method = 'path';
+      console.error(error.message);
+    }
+
     if (validRoutes) {
       component = matchLocation(routes, method);
       window.addEventListener('pushState', function () {
