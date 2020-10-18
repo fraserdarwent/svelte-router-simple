@@ -1,0 +1,4 @@
+**/tests.js
+**/*.log
+.github/
+**/components/HelloWorld/
