@@ -1,33 +1,33 @@
 <script context="module">
-  import "array-flat-polyfill";
+  import 'array-flat-polyfill';
 
-  export const go = function(pathname) {
+  export const go = function (pathname) {
     console.error(
       `[@fraserdarwent/svelte-router] Function "go" is deprecated and will be removed in future version, please use "route" instead`
     );
     route(pathname);
   };
 
-  export const route = function(pathname) {
-    window.history.pushState({}, "", pathname);
-    window.dispatchEvent(new Event("pushState"));
+  export const route = function (pathname) {
+    window.history.pushState({}, '', pathname);
+    window.dispatchEvent(new Event('pushState'));
   };
 
-  const newPathname = function(route, pathname) {
-    return pathname.substring(pathname.indexOf("/", 1), pathname.length);
+  const newPathname = function (route, pathname) {
+    return pathname.substring(pathname.indexOf('/', 1), pathname.length);
   };
 
-  const matchRoute = function(route, pathname) {
+  const matchRoute = function (route, pathname) {
     console.log(`Matching route ${route.path} to ${pathname}`);
 
-    if (route.path === "/*") {
+    if (route.path === '/*') {
       return true;
     }
 
     return pathname.startsWith(route.path);
   };
 
-  export const matchRoutes = function(routes = [], pathname) {
+  export const matchRoutes = function (routes = [], pathname) {
     console.log(`Matching ${JSON.stringify(routes)} to ${pathname}`);
 
     if (routes.length < 1) {
@@ -45,11 +45,11 @@
     return null;
   };
 
-  const matchLocation = function(routes) {
+  const matchLocation = function (routes) {
     return matchRoutes(routes, window.location.pathname);
   };
 
-  export const validateRoutes = function(routes) {
+  export const validateRoutes = function (routes) {
     const valid = routes.flat().every(route => {
       // If route has no component
       if (!route.component) {
@@ -60,33 +60,48 @@
       }
       // If route has no exact or prefix
       if (!route.path) {
-        console.error(
-          `[@fraserdarwent/svelte-router] All routes must have required key "path"`
-        );
+        console.error(`[@fraserdarwent/svelte-router] All routes must have required key "path"`);
         return false;
       }
       return true;
     });
     return valid;
   };
+
+  export const validateMethod = function (method) {
+    switch (method) {
+      case 'path':
+      case 'hash': {
+        return method;
+      }
+      default: {
+        console.error(
+          `[@fraserdarwent/svelte-router] Unknown method "${method}", falling back to "path"`
+        );
+        return 'path';
+      }
+    }
+  };
 </script>
 
 <script>
-  import { onMount } from "svelte";
+  import {onMount} from 'svelte';
   export let routes;
+  export let method = 'path';
 
   let component;
 
-  onMount(async function() {
+  onMount(async function () {
     const validRoutes = validateRoutes(routes);
+    method = validateMethod(method);
     if (validRoutes) {
-      component = matchLocation(routes);
-      window.addEventListener("pushState", function() {
-        component = matchLocation(routes);
+      component = matchLocation(routes, method);
+      window.addEventListener('pushState', function () {
+        component = matchLocation(routes, method);
       });
 
-      window.onpopstate = function(event) {
-        component = matchLocation(routes);
+      window.onpopstate = function (event) {
+        component = matchLocation(routes, method);
       };
     }
   });
