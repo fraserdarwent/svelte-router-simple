@@ -1,4 +1,5 @@
+.*
 **/tests.js
 **/*.log
-.github/
 **/components/HelloWorld/
+**/rollup.config.js
