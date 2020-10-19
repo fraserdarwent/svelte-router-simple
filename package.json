@@ -12,7 +12,6 @@
   "module": "src/main.js",
   "dependencies": {
     "array-flat-polyfill": "^1.0.1",
-    "shx": "^0.3.2",
     "svelte": "^3.23.2"
   },
   "devDependencies": {
@@ -21,6 +20,7 @@
     "prettier": "^2.1.2",
     "prettier-airbnb-config": "^1.0.0",
     "rollup": "^2.26.10",
-    "rollup-plugin-svelte": "^6.0.0"
+    "rollup-plugin-svelte": "^6.0.0",
+    "shx": "^0.3.2"
   }
 }
