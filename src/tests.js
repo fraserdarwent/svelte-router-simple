@@ -1,7 +1,13 @@
 import 'svelte/register.js';
 import log from '@fraserdarwent/javascript-logger';
 import assert from 'assert';
-import {route, matchRoutes, validateRoutes, validateMethod} from './components/Router.svelte';
+import {
+  route,
+  matchRoutes,
+  validateRoutes,
+  validateMethod,
+  setFallback,
+} from './components/Router.svelte';
 
 let tests = [];
 
@@ -37,16 +43,51 @@ tests.push(function validMethod() {
   }
 });
 
-tests.push(function testDepthZero() {
+tests.push(function testFallback() {
+  setFallback('a');
   const routes = [
     {
-      path: '/',
-      component: 'true',
+      path: '/b',
+      component: 'b',
     },
   ];
   try {
     assert.ok(validateRoutes(routes));
-    assert.equal(matchRoutes(routes, '/'), 'true');
+    assert.equal(matchRoutes(routes, '/a'), 'a');
+  } catch (error) {
+    return error;
+  }
+});
+
+tests.push(function testWildcard() {
+  const routes = [
+    {
+      path: '/a',
+      component: 'a',
+    },
+    {
+      path: '/*',
+      component: 'b',
+    },
+  ];
+  try {
+    assert.ok(validateRoutes(routes));
+    assert.equal(matchRoutes(routes, '/b'), 'b');
+  } catch (error) {
+    return error;
+  }
+});
+
+tests.push(function testDepthZero() {
+  const routes = [
+    {
+      path: '/',
+      component: 'a',
+    },
+  ];
+  try {
+    assert.ok(validateRoutes(routes));
+    assert.equal(matchRoutes(routes, '/'), 'a');
   } catch (error) {
     return error;
   }
@@ -55,17 +96,17 @@ tests.push(function testDepthZero() {
 tests.push(function testDepthOne() {
   const routes = [
     {
-      path: '/false',
-      component: 'false',
+      path: '/a',
+      component: 'a',
     },
     {
-      path: '/true',
-      component: 'true',
+      path: '/b',
+      component: 'b',
     },
   ];
   try {
     assert.ok(validateRoutes(routes));
-    assert.equal(matchRoutes(routes, '/true'), 'true');
+    assert.equal(matchRoutes(routes, '/a'), 'a');
   } catch (error) {
     return error;
   }
@@ -74,19 +115,20 @@ tests.push(function testDepthOne() {
 tests.push(function testDepthTwo() {
   const routes = [
     {
-      path: '/true',
-      component: 'false',
+      path: '/a',
+      component: 'a',
       routes: [
-        {path: '/true', component: 'true'},
-        {path: '/false', component: 'false'},
+        {path: '/b', component: 'b'},
+        {path: '/c', component: 'c'},
       ],
     },
   ];
   try {
     assert.ok(validateRoutes(routes));
-    assert.equal(matchRoutes(routes, '/true/true'), 'true');
-    assert.equal(matchRoutes(routes, '/true/false'), 'false');
+    assert.equal(matchRoutes(routes, '/a/b'), 'b');
+    assert.equal(matchRoutes(routes, '/a/c'), 'c');
   } catch (error) {
+    console.error('Failure');
     return error;
   }
 });
@@ -94,22 +136,25 @@ tests.push(function testDepthTwo() {
 tests.push(function testDepthThree() {
   const routes = [
     {
-      path: '/true',
-      component: 'false',
+      path: '/a',
+      component: 'a',
       routes: [
         {
-          path: '/*',
-          component: 'false',
-          routes: [{path: '/true', component: 'true'}],
+          path: '/b',
+          component: 'b',
+          routes: [
+            {
+              path: '/c',
+              component: 'c',
+            },
+          ],
         },
       ],
     },
   ];
   try {
     assert.ok(validateRoutes(routes));
-    assert.equal(matchRoutes(routes, '/true/true/true'), 'true');
-    assert.equal(matchRoutes(routes, '/true/true/false'), 'false');
-    assert.equal(matchRoutes(routes, '/true/false/false'), 'false');
+    assert.equal(matchRoutes(routes, '/a/b/c'), 'c');
   } catch (error) {
     return error;
   }
@@ -118,20 +163,20 @@ tests.push(function testDepthThree() {
 tests.push(function testDepthThreeWildcard() {
   const routes = [
     {
-      path: '/true',
-      component: 'false',
+      path: '/a',
+      component: 'a',
       routes: [
         {
           path: '/*',
-          component: 'true',
-          routes: [{path: '/true', component: 'true'}],
+          component: 'b',
+          routes: [{path: '/c', component: 'c'}],
         },
       ],
     },
   ];
   try {
     assert.ok(validateRoutes(routes));
-    assert.equal(matchRoutes(routes, '/true/true/true'), 'true');
+    assert.equal(matchRoutes(routes, '/a/b/c'), 'c');
   } catch (error) {
     return error;
   }

@@ -1,7 +1,8 @@
 <script context="module">
   import 'array-flat-polyfill';
 
-  let method;
+  let method = 'path';
+  let fallback = null;
 
   export const go = function (pathname) {
     console.error(
@@ -11,35 +12,36 @@
   };
 
   export const route = function (pathname) {
-    window.history.pushState({}, '', `#${pathname}`);
+    switch (method) {
+      case 'hash': {
+        window.history.pushState({}, '', `#${pathname}`);
+        break;
+      }
+      case 'path': {
+        window.history.pushState({}, '', pathname);
+        break;
+      }
+    }
     window.dispatchEvent(new Event('pushState'));
   };
 
-  const newPathname = function (route, pathname) {
-    return pathname.substring(pathname.indexOf('/', 1), pathname.length);
-  };
-
   const matchRoute = function (route, pathname) {
-    if (route.path === '/*') {
-      return true;
-    }
-
-    return pathname.startsWith(route.path);
+    return route.path === '/*' || route.path === `/${pathname}`;
   };
 
-  export const matchRoutes = function (routes = [], pathname) {
+  export const matchRoutes = function (routes = [], pathname, index = 1) {
+    const pathParts = pathname.split('/');
+
     if (routes.length < 1) {
       return null;
     }
-
-    const matched = routes.find(route => matchRoute(route, pathname));
+    const matched = routes.find(route => matchRoute(route, pathParts[index]));
 
     if (matched) {
-      pathname = newPathname(matched, pathname);
-      return matchRoutes(matched.routes, pathname) || matched.component;
+      return matchRoutes(matched.routes, pathname, index + 1) || matched.component;
     }
 
-    return null;
+    return fallback;
   };
 
   const matchLocation = function (routes) {
@@ -57,7 +59,7 @@
       }
     }
 
-    return matchRoutes(routes, pathname, method);
+    return matchRoutes(routes, pathname);
   };
 
   export const validateRoutes = function (routes) {
@@ -96,11 +98,16 @@
   export const setMethod = function (m) {
     method = m;
   };
+
+  export const setFallback = function (f) {
+    fallback = f;
+  };
 </script>
 
 <script>
   import {onMount} from 'svelte';
   export let routes;
+  export let fallback;
   export let method = 'path';
 
   let component;
@@ -116,6 +123,8 @@
     }
 
     setMethod(method);
+
+    setFallback(fallback);
 
     if (validRoutes) {
       component = matchLocation(routes);
