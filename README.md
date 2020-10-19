@@ -8,20 +8,25 @@ yarn add @fraserdarwent/svelte-router
 
 ## Usage
 
-```javascript
-  import Router from "svelte-router-simple";
+```html
+<script>
+  import Router from '@fraserdarwent/svelte-router';
+  import VideosComponent from './videos-components.svelte';
+  import PicturesComponent from './pictures-components.svelte';
 
   const routes = [
     {
-      exact: "/", // Specify an exact path match
-      component: HomeComponent
-    },
-    {
-      prefix: "/", // Specify a prefix path match, and attempt to match child routes
-      component: NotFound, // Used if no child routes match
+      path: '/',
+      component: HomeComponent,
       routes: [
-        { exact: "/videos", component: VideosComponents },
-        { exact: "/pictures", component: PicturesComponent },
+        {
+          path: '/videos',
+          component: VideosComponent,
+        },
+        {
+          path: '/pictures',
+          component: PicturesComponent,
+        },
       ],
     },
   ];
@@ -30,4 +35,19 @@ yarn add @fraserdarwent/svelte-router
 <div id="app">
   <Router {routes} />
 </div>
+```
+
+### To Use Hash Routing Method
+
+```html
+<Router {routes} method="hash" />
+```
+
+### To Navigate
+
+```html
+<script>
+  import {route} from '@fraserdarwent/svelte-router';
+</script>
+<button on:click={()=>{route('/videos')}}>Videos</button>
 ```

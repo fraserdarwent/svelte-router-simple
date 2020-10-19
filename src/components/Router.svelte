@@ -1,6 +1,8 @@
 <script context="module">
   import 'array-flat-polyfill';
 
+  let method;
+
   export const go = function (pathname) {
     console.error(
       `[@fraserdarwent/svelte-router] Function "go" is deprecated and will be removed in future version, please use "route" instead`
@@ -9,7 +11,7 @@
   };
 
   export const route = function (pathname) {
-    window.history.pushState({}, '', pathname);
+    window.history.pushState({}, '', `#${pathname}`);
     window.dispatchEvent(new Event('pushState'));
   };
 
@@ -18,8 +20,6 @@
   };
 
   const matchRoute = function (route, pathname) {
-    console.log(`Matching route ${route.path} to ${pathname}`);
-
     if (route.path === '/*') {
       return true;
     }
@@ -28,8 +28,6 @@
   };
 
   export const matchRoutes = function (routes = [], pathname) {
-    console.log(`Matching ${JSON.stringify(routes)} to ${pathname}`);
-
     if (routes.length < 1) {
       return null;
     }
@@ -37,7 +35,6 @@
     const matched = routes.find(route => matchRoute(route, pathname));
 
     if (matched) {
-      console.log(`Matched ${JSON.stringify(matched)}`);
       pathname = newPathname(matched, pathname);
       return matchRoutes(matched.routes, pathname) || matched.component;
     }
@@ -46,7 +43,21 @@
   };
 
   const matchLocation = function (routes) {
-    return matchRoutes(routes, window.location.pathname);
+    let pathname = '/';
+    switch (method) {
+      case 'hash': {
+        if (window.location.hash) {
+          pathname = window.location.hash.substring(1, window.location.hash.length);
+        }
+        break;
+      }
+      case 'path': {
+        pathname = window.location.pathname;
+        break;
+      }
+    }
+
+    return matchRoutes(routes, pathname, method);
   };
 
   export const validateRoutes = function (routes) {
@@ -81,6 +92,10 @@
       }
     }
   };
+
+  export const setMethod = function (m) {
+    method = m;
+  };
 </script>
 
 <script>
@@ -100,14 +115,20 @@
       console.error(error.message);
     }
 
+    setMethod(method);
+
     if (validRoutes) {
-      component = matchLocation(routes, method);
+      component = matchLocation(routes);
       window.addEventListener('pushState', function () {
-        component = matchLocation(routes, method);
+        component = matchLocation(routes);
       });
 
-      window.onpopstate = function (event) {
-        component = matchLocation(routes, method);
+      window.addEventListener('hashchange', function () {
+        component = matchLocation(routes);
+      });
+
+      window.onpopstate = function () {
+        component = matchLocation(routes);
       };
     }
   });

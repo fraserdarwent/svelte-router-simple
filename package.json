@@ -1,16 +1,18 @@
 {
   "name": "@fraserdarwent/svelte-router",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "license": "ISC",
   "scripts": {
     "tests:build": "rollup -c",
     "tests:run": "node dist/tests.js",
-    "test": "npm-run-all --sequential tests:build tests:run",
+    "tests:tidy": "shx rm -r dist/",
+    "test": "npm-run-all --sequential tests:build tests:run tests:tidy",
     "format": "prettier src/"
   },
   "module": "src/main.js",
   "dependencies": {
     "array-flat-polyfill": "^1.0.1",
+    "shx": "^0.3.2",
     "svelte": "^3.23.2"
   },
   "devDependencies": {
