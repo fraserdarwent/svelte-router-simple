@@ -1,18 +1,26 @@
 {
   "name": "@fraserdarwent/svelte-router",
-  "version": "1.1.3",
+  "version": "2.0.0",
   "license": "ISC",
   "scripts": {
-    "test": "node src/tests.js"
+    "tests:build": "rollup -c",
+    "tests:run": "node dist/tests.js",
+    "tests:tidy": "shx rm -r dist/",
+    "test": "npm-run-all --sequential tests:build tests:run tests:tidy",
+    "format": "prettier src/"
   },
-  "module": "src/index.js",
+  "module": "src/main.js",
   "dependencies": {
     "array-flat-polyfill": "^1.0.1",
-    "prettier": "^2.1.2",
-    "prettier-airbnb-config": "^1.0.0",
     "svelte": "^3.23.2"
   },
   "devDependencies": {
-    "@fraserdarwent/javascript-logger": "^1.0.3"
+    "@fraserdarwent/javascript-logger": "^1.0.4",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.1.2",
+    "prettier-airbnb-config": "^1.0.0",
+    "rollup": "^2.26.10",
+    "rollup-plugin-svelte": "^6.0.0",
+    "shx": "^0.3.2"
   }
 }
