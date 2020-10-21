@@ -20,7 +20,7 @@
     "prettier": "^2.1.2",
     "prettier-airbnb-config": "^1.0.0",
     "rollup": "^2.26.10",
-    "rollup-plugin-svelte": "^6.0.2",
+    "rollup-plugin-svelte": "^6.1.0",
     "shx": "^0.3.2"
   }
 }
