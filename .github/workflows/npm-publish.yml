@@ -5,6 +5,7 @@ on:
       - master
 jobs:
   build:
+    name: Test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -14,10 +15,11 @@ jobs:
         with:
           node-version: 12
       - name: Install Dependencies
-        run: npm install --production
+        run: npm install
       - name: Run Tests
         run: npm test
   publish-npm:
+    name: Publish
     needs: build
     runs-on: ubuntu-latest
     steps:
