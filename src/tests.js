@@ -1,4 +1,4 @@
-import 'svelte/register.js';
+import 'svelte/register';
 import log from '@fraserdarwent/javascript-logger';
 import assert from 'assert';
 import {
