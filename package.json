@@ -1,6 +1,6 @@
 {
   "name": "@fraserdarwent/svelte-router",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "license": "ISC",
   "scripts": {
     "tests:build": "rollup -c",
