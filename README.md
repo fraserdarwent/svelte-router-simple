@@ -11,35 +11,39 @@ yarn add @fraserdarwent/svelte-router
 ```html
 <script>
   import Router from '@fraserdarwent/svelte-router';
-  import VideosComponent from './videos-component.svelte';
-  import PicturesComponent from './pictures-component.svelte';
-  import DogPicturesComponent from './dog-pictures-component.svelte';
-  import CatPicturesComponent from './cat-pictures-component.svelte';
   import HomeComponent from './home-component.svelte';
-  import FourOFour from './404.svelte';
+  import AllPicturesComponent from './all-pictures-component.svelte';
+  import AllDogPicturesComponent from './all-dog-pictures-component.svelte';
+  import AllCatPicturesComponent from './all-cat-pictures-component.svelte';
+  import SpecificCatPicturesComponent from './specific-cat-pictures-component.svelte';
 
   const routes = [
     {
+      // Effective route is /
       path: '/',
       component: HomeComponent,
     },
     {
-      path: '/videos',
-      component: VideosComponent,
-    },
-    {
+      // Effective route is /pictures
       path: '/pictures',
-      component: PicturesComponent,
+      component: AllPicturesComponent,
       routes: [
         {
-          // Effective route is /pictures/components
+          // Effective route is /pictures/dogs
           path: '/dogs',
-          component: DogPicturesComponent,
+          component: AllDogPicturesComponent,
         },
         {
           // Effective route is /pictures/cats
           path: '/cats',
-          component: CatPicturesComponent,
+          component: AllCatPicturesComponent,
+          routes: [
+            {
+              // Effective route is /pictures/cats/*
+              path: '/*',
+              component: SpecificCatPicturesComponent,
+            },
+          ],
         },
       ],
     },
@@ -47,17 +51,13 @@ yarn add @fraserdarwent/svelte-router
 </script>
 
 <div id="app">
-  <Router {routes} fallback="{FourOFour}" />
+  <Router {routes} />
 </div>
 ```
 
-### To Use Hash Routing Method
+### Navigating
 
-```html
-<Router {routes} method="hash" />
-```
-
-### To Navigate
+Use the `route` method
 
 ```html
 <script>
@@ -69,8 +69,6 @@ yarn add @fraserdarwent/svelte-router
 ### Setting A Fallback
 
 A fallback component can be specified for when no route is matched
-
-#### Using Fallback
 
 ```html
 <script>
@@ -85,27 +83,16 @@ A fallback component can be specified for when no route is matched
 </div>
 ```
 
-#### Using Wildcard
+### Routing Methods
+
+#### Path
+
+Router defaults to path routing method
+
+### To Use Hash Routing Method
+
+#### Hash
 
 ```html
-<script>
-  import Router from '@fraserdarwent/svelte-router';
-  import HomeComponent from './home-component.svelte';
-  import FourOFour from './404.svelte';
-
-  const routes = [
-    {
-      path: '/',
-      component: HomeComponent,
-    },
-    {
-      path: '/*',
-      component: FourOFour,
-    },
-  ];
-</script>
-
-<div id="app">
-  <Router {routes} />
-</div>
+<Router {routes} method="hash" />
 ```
