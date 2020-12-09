@@ -1,6 +1,10 @@
 {
   "name": "@fraserdarwent/svelte-router",
   "version": "2.0.8",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fraserdarwent/svelte-router"
+  },
   "license": "ISC",
   "scripts": {
     "tests:build": "rollup -c",
